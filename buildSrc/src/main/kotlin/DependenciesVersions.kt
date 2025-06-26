@@ -1,6 +1,5 @@
 object DependenciesVersions {
     // --- Build Tools ---
-    const val AGP = "8.10.1"
     const val KOTLIN = "2.0.21"
 
     // --- Core Libraries ---
