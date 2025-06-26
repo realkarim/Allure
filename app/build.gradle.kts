@@ -1,21 +1,21 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    id(BuildPlugins.ANDROID_APPLICATION) version DependenciesVersions.AGP
+    id(BuildPlugins.KOTLIN_ANDROID) version DependenciesVersions.KOTLIN
+    id(BuildPlugins.ANDROID_COMPOSE) version DependenciesVersions.KOTLIN
 }
 
 android {
-    namespace = "com.realkarim.allure"
-    compileSdk = 35
+    namespace = BuildConfig.APP_ID
+    compileSdk = BuildConfig.COMPILE_SDK_VERSION
 
     defaultConfig {
-        applicationId = "com.realkarim.allure"
-        minSdk = 24
-        targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = BuildConfig.APP_ID
+        minSdk = BuildConfig.MIN_SDK_VERSION
+        targetSdk = BuildConfig.TARGET_SDK_VERSION
+        versionCode = ReleaseConfig.VERSION_CODE
+        versionName = ReleaseConfig.VERSION_NAME
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = TestBuildConfig.TEST_INSTRUMENTATION_RUNNER
     }
 
     buildTypes {
@@ -40,20 +40,28 @@ android {
 }
 
 dependencies {
+    // --- Core & Lifecycle ---
+    implementation(Dependencies.ANDROIDX_CORE_KTX)
+    implementation(Dependencies.ANDROIDX_LIFECYCLE_RUNTIME_KTX)
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+    // --- Jetpack Compose ---
+    implementation(Dependencies.ANDROIDX_ACTIVITY_COMPOSE)
+    implementation(platform(Dependencies.ANDROIDX_COMPOSE_BOM))
+    implementation(Dependencies.ANDROIDX_UI)
+    implementation(Dependencies.ANDROIDX_UI_GRAPHICS)
+    implementation(Dependencies.ANDROIDX_UI_TOOLING_PREVIEW)
+    implementation(Dependencies.ANDROIDX_MATERIAL3)
+
+    // --- Unit Testing ---
+    testImplementation(TestDependencies.JUNIT)
+
+    // --- Android Instrumented Testing ---
+    androidTestImplementation(TestDependencies.ANDROIDX_JUNIT)
+    androidTestImplementation(TestDependencies.ANDROIDX_ESPRESSO_CORE)
+    androidTestImplementation(platform(Dependencies.ANDROIDX_COMPOSE_BOM))
+    androidTestImplementation(TestDependencies.ANDROIDX_UI_TEST_JUNIT4)
+
+    // --- Debug-Only Dependencies ---
+    debugImplementation(Dependencies.ANDROIDX_UI_TOOLING)
+    debugImplementation(TestDependencies.ANDROIDX_UI_TEST_MANIFEST)
 }
