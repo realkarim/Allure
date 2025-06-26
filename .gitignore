@@ -1,0 +1,56 @@
+# === Project Files ===
+*.iml
+.DS_Store
+
+# === Gradle ===
+.gradle/
+**/build/
+!gradle-wrapper.jar
+.gradle-cache/
+
+# === Local Properties ===
+local.properties
+/local.properties
+
+# === Android Studio ===
+.idea/
+.idea/caches
+.idea/libraries
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+
+# === Build Artifacts ===
+/build/
+captures/
+/externalNativeBuild/
+/cxx/
+
+# === Jetpack Compose (optional) ===
+compose_cache/
+
+# === Kotlin ===
+*.kotlin_module
+
+# === Log & Dump Files ===
+*.log
+*.hprof
+
+# === Test Coverage ===
+/coverage/
+
+# === Keystore Files ===
+*.jks
+*.keystore
+
+# === Misc Files ===
+*.swp
+*.tmp
+*.bak
+*.orig
+*.rej
+*.apk
+*.ap_
+*.dex
+*.class
