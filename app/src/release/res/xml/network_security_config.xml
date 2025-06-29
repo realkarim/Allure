@@ -1,0 +1,15 @@
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+    <!--for production builds-->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">release.allure.com</domain>
+        <pin-set>
+            <pin digest="SHA-256">n8jI0H2e5jLk8fOqV43ep6Nq8T1Fj1R4/FSxqF1upHQ=</pin>
+        </pin-set>
+    </domain-config>
+</network-security-config>
