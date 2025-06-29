@@ -32,6 +32,9 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+
+        // Test dependency availability
+//          val room = Room.databaseBuilder()
     }
 }
 

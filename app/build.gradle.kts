@@ -1,18 +1,27 @@
+import buildutils.BuildConfig
 import buildutils.BuildCreator
 import buildutils.BuildDimensions
-import buildutils.BuildConfig
-import dependency.Dependencies
+import dependency.androidx
+import dependency.hilt
+import dependency.loginModule
+import dependency.okHttp
+import dependency.retrofit
+import dependency.room
+import dependency.testDebugDeps
+import dependency.testDeps
+import dependency.testImplDeps
 import flavor.BuildFlavor
 import release.ReleaseConfig
 import signing.BuildSigning
 import signing.SigningTypes
 import test.TestBuildConfig
-import test.TestDependencies
 
 plugins {
     id(plugin.BuildPlugins.ANDROID_APPLICATION)
     id(plugin.BuildPlugins.KOTLIN_ANDROID)
-    id(plugin.BuildPlugins.ANDROID_COMPOSE) version dependency.DependenciesVersions.KOTLIN
+    id(plugin.BuildPlugins.ANDROID)
+    id(plugin.BuildPlugins.ANDROID_COMPOSE) version dependency.DependenciesVersions.COMPOSE_COMPILER
+    kotlin(plugin.BuildPlugins.KAPT)
 }
 
 android {
@@ -75,28 +84,13 @@ android {
 }
 
 dependencies {
-    // --- Core & Lifecycle ---
-    implementation(Dependencies.ANDROIDX_CORE_KTX)
-    implementation(Dependencies.ANDROIDX_LIFECYCLE_RUNTIME_KTX)
-
-    // --- Jetpack Compose ---
-    implementation(Dependencies.ANDROIDX_ACTIVITY_COMPOSE)
-    implementation(platform(Dependencies.ANDROIDX_COMPOSE_BOM))
-    implementation(Dependencies.ANDROIDX_UI)
-    implementation(Dependencies.ANDROIDX_UI_GRAPHICS)
-    implementation(Dependencies.ANDROIDX_UI_TOOLING_PREVIEW)
-    implementation(Dependencies.ANDROIDX_MATERIAL3)
-
-    // --- Unit Testing ---
-    testImplementation(TestDependencies.JUNIT)
-
-    // --- Android Instrumented Testing ---
-    androidTestImplementation(TestDependencies.ANDROIDX_JUNIT)
-    androidTestImplementation(TestDependencies.ANDROIDX_ESPRESSO_CORE)
-    androidTestImplementation(platform(Dependencies.ANDROIDX_COMPOSE_BOM))
-    androidTestImplementation(TestDependencies.ANDROIDX_UI_TEST_JUNIT4)
-
-    // --- Debug-Only Dependencies ---
-    debugImplementation(Dependencies.ANDROIDX_UI_TOOLING)
-    debugImplementation(TestDependencies.ANDROIDX_UI_TEST_MANIFEST)
+    loginModule()
+    androidx()
+    hilt()
+    room()
+    okHttp()
+    retrofit()
+    testDeps()
+    testImplDeps()
+    testDebugDeps()
 }

@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Allure"
 include(":app")
- 
+include(":features:login")
+include(":features:home")
