@@ -1,3 +1,5 @@
+package flavor
+
 object FlavorTypes {
     // Store
     const val GOOGLE = "google"

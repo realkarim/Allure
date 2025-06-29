@@ -1,3 +1,7 @@
+package test
+
+import dependency.DependenciesVersions
+
 object TestDependencies {
     // --- Unit Testing ---
     const val JUNIT = "junit:junit:${DependenciesVersions.JUNIT}"

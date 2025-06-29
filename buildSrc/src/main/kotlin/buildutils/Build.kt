@@ -1,3 +1,5 @@
+package buildutils
+
 sealed class Build {
     open val isMinifyEnabled = false
     open val enableUnitTestCoverage = false

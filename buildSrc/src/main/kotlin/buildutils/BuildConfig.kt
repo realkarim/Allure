@@ -1,3 +1,5 @@
+package buildutils
+
 object BuildConfig {
     const val APP_ID = "com.realkarim.allure"
     const val MIN_SDK_VERSION = 24

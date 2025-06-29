@@ -1,3 +1,5 @@
+package dependency
+
 object DependenciesVersions {
     // --- Build Tools ---
     const val KOTLIN = "2.0.21"
