@@ -18,87 +18,88 @@ import signing.SigningTypes
 import test.TestBuildConfig
 
 plugins {
-    id(plugin.BuildPlugins.ANDROID_APPLICATION)
-    id(plugin.BuildPlugins.KOTLIN_ANDROID)
-    id(plugin.BuildPlugins.ANDROID)
-    id(plugin.BuildPlugins.ANDROID_COMPOSE) version dependency.DependenciesVersions.COMPOSE_COMPILER
-    id(plugin.BuildPlugins.KAPT)
-    id(plugin.BuildPlugins.KTLINT)
+  id(plugin.BuildPlugins.ANDROID_APPLICATION)
+  id(plugin.BuildPlugins.KOTLIN_ANDROID)
+  id(plugin.BuildPlugins.ANDROID)
+  id(plugin.BuildPlugins.ANDROID_COMPOSE) version dependency.DependenciesVersions.COMPOSE_COMPILER
+  id(plugin.BuildPlugins.KAPT)
+  id(plugin.BuildPlugins.KTLINT)
+  id(plugin.BuildPlugins.SPOTLESS)
 }
 
 android {
-    namespace = BuildConfig.APP_ID
-    compileSdk = BuildConfig.COMPILE_SDK_VERSION
+  namespace = BuildConfig.APP_ID
+  compileSdk = BuildConfig.COMPILE_SDK_VERSION
 
-    defaultConfig {
-        applicationId = BuildConfig.APP_ID
-        minSdk = BuildConfig.MIN_SDK_VERSION
-        targetSdk = BuildConfig.TARGET_SDK_VERSION
-        versionCode = ReleaseConfig.VERSION_CODE
-        versionName = ReleaseConfig.VERSION_NAME
+  defaultConfig {
+    applicationId = BuildConfig.APP_ID
+    minSdk = BuildConfig.MIN_SDK_VERSION
+    targetSdk = BuildConfig.TARGET_SDK_VERSION
+    versionCode = ReleaseConfig.VERSION_CODE
+    versionName = ReleaseConfig.VERSION_NAME
 
-        testInstrumentationRunner = TestBuildConfig.TEST_INSTRUMENTATION_RUNNER
+    testInstrumentationRunner = TestBuildConfig.TEST_INSTRUMENTATION_RUNNER
+  }
+
+  signingConfigs {
+    BuildSigning.Release(project).create(this)
+    BuildSigning.ReleaseExternalQa(project).create(this)
+    BuildSigning.Debug(project).create(this)
+  }
+
+  buildTypes {
+    BuildCreator.Release(project).create(this).apply {
+      proguardFiles(
+        getDefaultProguardFile("proguard-android-optimize.txt"),
+        "proguard-rules.pro",
+      )
+      signingConfig = signingConfigs.getByName(SigningTypes.RELEASE)
     }
-
-    signingConfigs {
-        BuildSigning.Release(project).create(this)
-        BuildSigning.ReleaseExternalQa(project).create(this)
-        BuildSigning.Debug(project).create(this)
+    BuildCreator.Debug(project).create(this).apply {
+      signingConfig = signingConfigs.getByName(SigningTypes.DEBUG)
     }
-
-    buildTypes {
-        BuildCreator.Release(project).create(this).apply {
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
-            )
-            signingConfig = signingConfigs.getByName(SigningTypes.RELEASE)
-        }
-        BuildCreator.Debug(project).create(this).apply {
-            signingConfig = signingConfigs.getByName(SigningTypes.DEBUG)
-        }
-        BuildCreator.ReleaseExternalQA(project).create(this).apply {
-            signingConfig = signingConfigs.getByName(SigningTypes.RELEASE_EXTERNAL_QA)
-        }
+    BuildCreator.ReleaseExternalQA(project).create(this).apply {
+      signingConfig = signingConfigs.getByName(SigningTypes.RELEASE_EXTERNAL_QA)
     }
+  }
 
-    flavorDimensions.add(BuildDimensions.APP)
-    flavorDimensions.add(BuildDimensions.STORE)
+  flavorDimensions.add(BuildDimensions.APP)
+  flavorDimensions.add(BuildDimensions.STORE)
 
-    productFlavors {
-        BuildFlavor.Google.create(this)
-        BuildFlavor.Huawei.create(this)
-        BuildFlavor.Consumer.create(this)
-        BuildFlavor.Provider.create(this)
-    }
+  productFlavors {
+    BuildFlavor.Google.create(this)
+    BuildFlavor.Huawei.create(this)
+    BuildFlavor.Consumer.create(this)
+    BuildFlavor.Provider.create(this)
+  }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
-    }
+  compileOptions {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+  }
+  kotlinOptions {
+    jvmTarget = JavaVersion.VERSION_11.toString()
+  }
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = DependenciesVersions.KOTLIN_COMPILER
-    }
+  composeOptions {
+    kotlinCompilerExtensionVersion = DependenciesVersions.KOTLIN_COMPILER
+  }
 
-    buildFeatures {
-        compose = true
-        buildConfig = true
-    }
+  buildFeatures {
+    compose = true
+    buildConfig = true
+  }
 }
 
 dependencies {
-    loginModule()
-    androidx()
-    hilt()
-    room()
-    okHttp()
-    retrofit()
-    testDeps()
-    testImplDeps()
-    testDebugDeps()
-    testImplementation(kotlin("test"))
+  loginModule()
+  androidx()
+  hilt()
+  room()
+  okHttp()
+  retrofit()
+  testDeps()
+  testImplDeps()
+  testDebugDeps()
+  testImplementation(kotlin("test"))
 }

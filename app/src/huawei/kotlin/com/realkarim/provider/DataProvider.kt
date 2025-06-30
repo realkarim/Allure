@@ -1,5 +1,5 @@
 package com.realkarim.provider
 
 object DataProvider {
-    const val userName = "UsernameHuawei"
+  const val userName = "UsernameHuawei"
 }

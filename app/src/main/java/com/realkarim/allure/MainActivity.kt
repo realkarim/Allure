@@ -17,57 +17,57 @@ import com.realkarim.allure.ui.theme.AllureTheme
 import com.realkarim.provider.DataProvider
 
 class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            AllureTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = DataProvider.userName,
-                        modifier = Modifier
-                            .padding(innerPadding)
-                            .padding(16.dp),
-                    )
-                }
-            }
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    enableEdgeToEdge()
+    setContent {
+      AllureTheme {
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+          Greeting(
+            name = DataProvider.userName,
+            modifier = Modifier
+              .padding(innerPadding)
+              .padding(16.dp),
+          )
         }
-
-        // Test dependency availability
-//          val room = Room.databaseBuilder()
+      }
     }
+
+    // Test dependency availability
+//          val room = Room.databaseBuilder()
+  }
 }
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Column(modifier = modifier) {
-        Text(
-            text = "Hello $name!",
-            modifier = modifier,
-        )
-        Text(
-            text = "Base Url: ${BuildConfig.BASE_URL}",
-            modifier = modifier,
-        )
-        Text(
-            text = "DB Version: ${BuildConfig.DB_VERSION}",
-            modifier = modifier,
-        )
-        Text(
-            text = "Can Clear Cache: ${BuildConfig.CAN_CLEAR_CACHE}",
-            modifier = modifier,
-        )
-        Text(
-            text = "API Key: ${BuildConfig.API_KEY}",
-            modifier = modifier,
-        )
-    }
+  Column(modifier = modifier) {
+    Text(
+      text = "Hello $name!",
+      modifier = modifier,
+    )
+    Text(
+      text = "Base Url: ${BuildConfig.BASE_URL}",
+      modifier = modifier,
+    )
+    Text(
+      text = "DB Version: ${BuildConfig.DB_VERSION}",
+      modifier = modifier,
+    )
+    Text(
+      text = "Can Clear Cache: ${BuildConfig.CAN_CLEAR_CACHE}",
+      modifier = modifier,
+    )
+    Text(
+      text = "API Key: ${BuildConfig.API_KEY}",
+      modifier = modifier,
+    )
+  }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    AllureTheme {
-        Greeting("Android")
-    }
+  AllureTheme {
+    Greeting("Android")
+  }
 }
