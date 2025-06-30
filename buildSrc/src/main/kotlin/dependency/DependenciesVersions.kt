@@ -7,6 +7,7 @@ object DependenciesVersions {
 
     // Kotlin
     const val KOTLIN = "1.9.23"
+    const val KOTLIN_COMPILER = "1.5.1"
 
     // Testing
     const val JUNIT = "4.13.2"
@@ -16,7 +17,7 @@ object DependenciesVersions {
     // Jetpack Compose
     const val ACTIVITY_COMPOSE = "1.9.0"
     const val COMPOSE_UI = "1.6.10"
-    const val COMPOSE_COMPILER = "2.0.21"
+    const val COMPOSE_COMPILER = "2.2.0"
     const val MATERIAL_3 = "1.3.1"
 
     // Networking

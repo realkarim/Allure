@@ -7,7 +7,7 @@ import dependency.testImplDeps
 plugins {
     id(plugin.BuildPlugins.ANDROID_LIBRARY)
     id(plugin.BuildPlugins.KOTLIN_ANDROID)
-    kotlin(plugin.BuildPlugins.KAPT)
+    id(plugin.BuildPlugins.KAPT)
 }
 
 android {

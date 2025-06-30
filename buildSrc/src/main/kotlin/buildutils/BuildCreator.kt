@@ -1,6 +1,7 @@
 package buildutils
 
 import com.android.build.api.dsl.ApplicationBuildType
+import com.android.build.api.dsl.LibraryBuildType
 import extension.buildConfigBooleanField
 import extension.buildConfigIntField
 import extension.buildConfigStringField
@@ -10,6 +11,8 @@ import org.gradle.api.Project
 
 sealed class BuildCreator(val name: String) {
     abstract fun create(namedDomainObjectContainer: NamedDomainObjectContainer<ApplicationBuildType>): ApplicationBuildType
+
+    abstract fun createLibrary(namedDomainObjectContainer: NamedDomainObjectContainer<LibraryBuildType>): LibraryBuildType
 
     class Release(private val project: Project) : BuildCreator(BuildTypes.RELEASE) {
         override fun create(namedDomainObjectContainer: NamedDomainObjectContainer<ApplicationBuildType>): ApplicationBuildType {
@@ -34,6 +37,14 @@ sealed class BuildCreator(val name: String) {
                     BuildVariables.API_KEY,
                     project.getLocalProperty("release.api_key")
                 )
+            }
+        }
+
+        override fun createLibrary(namedDomainObjectContainer: NamedDomainObjectContainer<LibraryBuildType>): LibraryBuildType {
+            return namedDomainObjectContainer.getByName(name) {
+                isMinifyEnabled = Build.Release.isMinifyEnabled
+                enableUnitTestCoverage = Build.Release.enableUnitTestCoverage
+
             }
         }
     }
@@ -65,6 +76,13 @@ sealed class BuildCreator(val name: String) {
                 )
             }
         }
+
+        override fun createLibrary(namedDomainObjectContainer: NamedDomainObjectContainer<LibraryBuildType>): LibraryBuildType {
+            return namedDomainObjectContainer.getByName(name) {
+                isMinifyEnabled = Build.Debug.isMinifyEnabled
+                enableUnitTestCoverage = Build.Debug.enableUnitTestCoverage
+            }
+        }
     }
 
     class ReleaseExternalQA(private val project: Project) :
@@ -93,6 +111,14 @@ sealed class BuildCreator(val name: String) {
                     BuildVariables.API_KEY,
                     project.getLocalProperty("debug.api_key")
                 )
+            }
+        }
+
+        override fun createLibrary(namedDomainObjectContainer: NamedDomainObjectContainer<LibraryBuildType>): LibraryBuildType {
+            return namedDomainObjectContainer.create(name) {
+                isMinifyEnabled = Build.ReleaseExternalQa.isMinifyEnabled
+                enableUnitTestCoverage = Build.ReleaseExternalQa.enableUnitTestCoverage
+
             }
         }
     }

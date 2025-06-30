@@ -1,6 +1,7 @@
 import buildutils.BuildConfig
 import buildutils.BuildCreator
 import buildutils.BuildDimensions
+import dependency.DependenciesVersions
 import dependency.androidx
 import dependency.hilt
 import dependency.loginModule
@@ -21,7 +22,7 @@ plugins {
     id(plugin.BuildPlugins.KOTLIN_ANDROID)
     id(plugin.BuildPlugins.ANDROID)
     id(plugin.BuildPlugins.ANDROID_COMPOSE) version dependency.DependenciesVersions.COMPOSE_COMPILER
-    kotlin(plugin.BuildPlugins.KAPT)
+    id(plugin.BuildPlugins.KAPT)
 }
 
 android {
@@ -75,8 +76,13 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = DependenciesVersions.KOTLIN_COMPILER
+    }
+
     buildFeatures {
         compose = true
         buildConfig = true
