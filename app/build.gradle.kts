@@ -23,6 +23,7 @@ plugins {
     id(plugin.BuildPlugins.ANDROID)
     id(plugin.BuildPlugins.ANDROID_COMPOSE) version dependency.DependenciesVersions.COMPOSE_COMPILER
     id(plugin.BuildPlugins.KAPT)
+    id(plugin.BuildPlugins.KTLINT)
 }
 
 android {
@@ -49,7 +50,7 @@ android {
         BuildCreator.Release(project).create(this).apply {
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
             signingConfig = signingConfigs.getByName(SigningTypes.RELEASE)
         }
@@ -99,4 +100,5 @@ dependencies {
     testDeps()
     testImplDeps()
     testDebugDeps()
+    testImplementation(kotlin("test"))
 }

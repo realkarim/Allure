@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
                         name = DataProvider.userName,
                         modifier = Modifier
                             .padding(innerPadding)
-                            .padding(16.dp)
+                            .padding(16.dp),
                     )
                 }
             }
@@ -43,23 +43,23 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
         Text(
             text = "Hello $name!",
-            modifier = modifier
+            modifier = modifier,
         )
         Text(
             text = "Base Url: ${BuildConfig.BASE_URL}",
-            modifier = modifier
+            modifier = modifier,
         )
         Text(
             text = "DB Version: ${BuildConfig.DB_VERSION}",
-            modifier = modifier
+            modifier = modifier,
         )
         Text(
             text = "Can Clear Cache: ${BuildConfig.CAN_CLEAR_CACHE}",
-            modifier = modifier
+            modifier = modifier,
         )
         Text(
             text = "API Key: ${BuildConfig.API_KEY}",
-            modifier = modifier
+            modifier = modifier,
         )
     }
 }
