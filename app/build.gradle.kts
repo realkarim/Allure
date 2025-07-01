@@ -26,6 +26,7 @@ plugins {
   id(plugin.BuildPlugins.KTLINT)
   id(plugin.BuildPlugins.SPOTLESS)
   id(plugin.BuildPlugins.DETEKT)
+  id(plugin.BuildPlugins.UPDATE_DEPS_VERSIONS)
 }
 
 android {
