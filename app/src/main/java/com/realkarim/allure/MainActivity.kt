@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
     setContent {
       AllureTheme {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-          Greeting(
+          Greetings(
             name = DataProvider.userName,
             modifier = Modifier
               .padding(innerPadding)
@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun Greetings(name: String, modifier: Modifier = Modifier) {
   Column(modifier = modifier) {
     Text(
       text = "Hello $name!",
@@ -68,6 +68,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
   AllureTheme {
-    Greeting("Android")
+//    Greeting("Android")
   }
 }

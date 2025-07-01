@@ -25,6 +25,7 @@ plugins {
   id(plugin.BuildPlugins.KAPT)
   id(plugin.BuildPlugins.KTLINT)
   id(plugin.BuildPlugins.SPOTLESS)
+  id(plugin.BuildPlugins.DETEKT)
 }
 
 android {
