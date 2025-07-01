@@ -54,3 +54,5 @@ compose_cache/
 *.ap_
 *.dex
 *.class
+
+/detekt
