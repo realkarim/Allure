@@ -16,7 +16,7 @@ object DependenciesVersions {
 
     // Jetpack Compose
     const val ACTIVITY_COMPOSE = "1.9.0"
-    const val COMPOSE_UI = "1.6.10"
+    const val COMPOSE_UI = "1.8.3"
     const val COMPOSE_COMPILER = "2.2.0"
     const val MATERIAL_3 = "1.3.1"
 
