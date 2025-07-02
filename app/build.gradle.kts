@@ -28,6 +28,7 @@ plugins {
   id(plugin.BuildPlugins.DETEKT)
   id(plugin.BuildPlugins.UPDATE_DEPS_VERSIONS)
   id(plugin.BuildPlugins.DOKKA)
+  id(plugin.BuildPlugins.HILT) version dependency.DependenciesVersions.HILT
 }
 
 android {

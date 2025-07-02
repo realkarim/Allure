@@ -21,6 +21,11 @@ object Dependencies {
     const val HILT_ANDROID = "com.google.dagger:hilt-android:${DependenciesVersions.HILT}"
     const val HILT_COMPILER = "com.google.dagger:hilt-compiler:${DependenciesVersions.HILT}"
     const val HILT_AGP = "com.google.dagger:hilt-android-gradle-plugin:${DependenciesVersions.HILT}"
+    const val HILT_COMPOSE = "androidx.hilt:hilt-work:${DependenciesVersions.HILT_COMPOSE}"
+    const val HILT_COMPILER_KAPT =
+        "androidx.hilt:hilt-compiler:${DependenciesVersions.HILT_COMPOSE}"
+    const val HILT_NAVIGATION =
+        "androidx.hilt:hilt-navigation-compose:${DependenciesVersions.HILT_COMPOSE}"
 
     // Networking (Retrofit & OkHttp)
     const val RETROFIT = "com.squareup.retrofit2:retrofit:${DependenciesVersions.RETROFIT}"

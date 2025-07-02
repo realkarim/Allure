@@ -27,6 +27,7 @@ object DependenciesVersions {
 
     // Dependency Injection
     const val HILT = "2.51.1"
+    const val HILT_COMPOSE = "1.2.0"
 
     // Database
     const val ROOM = "2.6.1"
