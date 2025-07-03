@@ -3,9 +3,12 @@ import buildutils.BuildCreator
 import buildutils.BuildDimensions
 import dependency.DependenciesVersions
 import dependency.androidx
+import dependency.dataModule
+import dependency.domainModule
 import dependency.hilt
 import dependency.loginModule
 import dependency.okHttp
+import dependency.presentationModule
 import dependency.retrofit
 import dependency.room
 import dependency.testDebugDeps
@@ -97,6 +100,9 @@ android {
 
 dependencies {
   loginModule()
+  dataModule()
+  domainModule() // May not be needed
+  presentationModule()
   androidx()
   hilt()
   room()
@@ -105,5 +111,4 @@ dependencies {
   testDeps()
   testImplDeps()
   testDebugDeps()
-  testImplementation(kotlin("test"))
 }

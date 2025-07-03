@@ -19,6 +19,7 @@ object DependenciesVersions {
     const val COMPOSE_UI = "1.8.3"
     const val COMPOSE_COMPILER = "2.2.0"
     const val MATERIAL_3 = "1.3.1"
+    const val RUN_TIME = "2.7.1"
 
     // Networking
     const val RETROFIT = "2.11.0"
@@ -26,7 +27,7 @@ object DependenciesVersions {
     const val OKHTTP = "5.0.0-alpha.14"
 
     // Dependency Injection
-    const val HILT = "2.51.1"
+    const val HILT = "2.56.2"
     const val HILT_COMPOSE = "1.2.0"
 
     // Database

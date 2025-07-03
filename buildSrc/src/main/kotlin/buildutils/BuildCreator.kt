@@ -25,6 +25,10 @@ sealed class BuildCreator(val name: String) {
                     BuildVariables.BASE_URL,
                     project.getLocalProperty("release_endpoint")
                 )
+                buildConfigStringField(
+                    BuildVariables.PIN_CERTIFICATE,
+                    project.getLocalProperty("release.project.certificate_pin")
+                )
                 buildConfigIntField(
                     BuildVariables.DB_VERSION,
                     project.getLocalProperty("db_version").toInt()
@@ -45,6 +49,26 @@ sealed class BuildCreator(val name: String) {
                 isMinifyEnabled = Build.Release.isMinifyEnabled
                 enableUnitTestCoverage = Build.Release.enableUnitTestCoverage
 
+                buildConfigStringField(
+                    BuildVariables.BASE_URL,
+                    project.getLocalProperty("release_endpoint")
+                )
+                buildConfigStringField(
+                    BuildVariables.PIN_CERTIFICATE,
+                    project.getLocalProperty("release.project.certificate_pin")
+                )
+                buildConfigIntField(
+                    BuildVariables.DB_VERSION,
+                    project.getLocalProperty("db_version").toInt()
+                )
+                buildConfigBooleanField(
+                    BuildVariables.CAN_CLEAR_CACHE,
+                    project.getLocalProperty("clear_cache").toBoolean()
+                )
+                buildConfigStringField(
+                    BuildVariables.API_KEY,
+                    project.getLocalProperty("release.api_key")
+                )
             }
         }
     }
@@ -61,6 +85,10 @@ sealed class BuildCreator(val name: String) {
                 buildConfigStringField(
                     BuildVariables.BASE_URL,
                     project.getLocalProperty("debug_endpoint")
+                )
+                buildConfigStringField(
+                    BuildVariables.PIN_CERTIFICATE,
+                    project.getLocalProperty("qa.project.certificate_pin")
                 )
                 buildConfigIntField(
                     BuildVariables.DB_VERSION,
@@ -81,6 +109,27 @@ sealed class BuildCreator(val name: String) {
             return namedDomainObjectContainer.getByName(name) {
                 isMinifyEnabled = Build.Debug.isMinifyEnabled
                 enableUnitTestCoverage = Build.Debug.enableUnitTestCoverage
+
+                buildConfigStringField(
+                    BuildVariables.BASE_URL,
+                    project.getLocalProperty("debug_endpoint")
+                )
+                buildConfigStringField(
+                    BuildVariables.PIN_CERTIFICATE,
+                    project.getLocalProperty("qa.project.certificate_pin")
+                )
+                buildConfigIntField(
+                    BuildVariables.DB_VERSION,
+                    project.getLocalProperty("db_version").toInt()
+                )
+                buildConfigBooleanField(
+                    BuildVariables.CAN_CLEAR_CACHE,
+                    project.getLocalProperty("clear_cache").toBoolean()
+                )
+                buildConfigStringField(
+                    BuildVariables.API_KEY,
+                    project.getLocalProperty("debug.api_key")
+                )
             }
         }
     }
@@ -99,6 +148,10 @@ sealed class BuildCreator(val name: String) {
                     BuildVariables.BASE_URL,
                     project.getLocalProperty("qa_endpoint")
                 )
+                buildConfigStringField(
+                    BuildVariables.PIN_CERTIFICATE,
+                    project.getLocalProperty("qa.project.certificate_pin")
+                )
                 buildConfigIntField(
                     BuildVariables.DB_VERSION,
                     project.getLocalProperty("db_version").toInt()
@@ -119,6 +172,26 @@ sealed class BuildCreator(val name: String) {
                 isMinifyEnabled = Build.ReleaseExternalQa.isMinifyEnabled
                 enableUnitTestCoverage = Build.ReleaseExternalQa.enableUnitTestCoverage
 
+                buildConfigStringField(
+                    BuildVariables.BASE_URL,
+                    project.getLocalProperty("qa_endpoint")
+                )
+                buildConfigStringField(
+                    BuildVariables.PIN_CERTIFICATE,
+                    project.getLocalProperty("qa.project.certificate_pin")
+                )
+                buildConfigIntField(
+                    BuildVariables.DB_VERSION,
+                    project.getLocalProperty("db_version").toInt()
+                )
+                buildConfigBooleanField(
+                    BuildVariables.CAN_CLEAR_CACHE,
+                    project.getLocalProperty("clear_cache").toBoolean()
+                )
+                buildConfigStringField(
+                    BuildVariables.API_KEY,
+                    project.getLocalProperty("debug.api_key")
+                )
             }
         }
     }

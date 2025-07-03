@@ -39,6 +39,8 @@ fun DependencyHandler.androidx() {
     implementation(Dependencies.ANDROIDX_UI_GRAPHICS)
     implementation(Dependencies.ANDROIDX_UI_TOOLING_PREVIEW)
     implementation(Dependencies.ANDROIDX_MATERIAL3)
+    // Fix issue requiring that one of FLAG_IMMUTABLE or FLAG_MUTABLE be specified when creating a PendingIntent
+    implementation(Dependencies.WORK_RUNTIME)
 }
 
 fun DependencyHandler.testDeps() {
