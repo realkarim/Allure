@@ -4,17 +4,17 @@ import dependency.testImplDeps
 import plugin.SharedLibraryGradlePlugin
 
 plugins {
-    id(plugin.BuildPlugins.ANDROID_LIBRARY)
+  id(plugin.BuildPlugins.ANDROID_LIBRARY)
 }
 
 android {
-    namespace = "com.realkarim.domain"
+  namespace = "com.realkarim.domain"
 }
 
 apply<SharedLibraryGradlePlugin>()
 
 dependencies {
-    testDeps()
-    testImplDeps()
-    testDebugDeps()
+  testDeps()
+  testImplDeps()
+  testDebugDeps()
 }
