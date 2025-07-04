@@ -1,5 +1,7 @@
 package com.realkarim.data.di
 
+import android.content.Context
+import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.realkarim.data.BuildConfig
 import com.realkarim.data.HEADER_INTERCEPTOR_TAG
@@ -7,6 +9,8 @@ import com.realkarim.data.LOGGING_INTERCEPTOR_TAG
 import com.realkarim.data.OkHttpClientProvider
 import com.realkarim.data.OkHttpClientProviderImpl
 import com.realkarim.data.ServiceFactory
+import com.realkarim.data.connectivity.NetworkMonitor
+import com.realkarim.data.connectivity.NetworkMonitorImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,6 +25,19 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
+
+  @Provides
+  @Singleton
+  fun provideGson(): Gson {
+    return Gson()
+  }
+
+  @Provides
+  @Singleton
+  fun provideNetworkMonitor(context: Context): NetworkMonitor {
+    return NetworkMonitorImpl(context)
+  }
+
   @Provides
   @Singleton
   fun provideOkHttpClientProvider(): OkHttpClientProvider {

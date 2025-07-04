@@ -3,6 +3,7 @@ package com.realkarim.data.di
 import com.realkarim.data.ACCESS_TOKEN_TAG
 import com.realkarim.data.CLIENT_ID_TAG
 import com.realkarim.data.LANGUAGE_TAG
+import com.realkarim.data.USER_ID_TAG
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,6 +15,14 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class ConfigModule {
+
+  @Provides
+  @Singleton
+  @Named(USER_ID_TAG)
+  fun provideUserId(): () -> String? {
+    return { "" } // todo get user id from user prefs later
+  }
+
   @Provides
   @Singleton
   @Named(LANGUAGE_TAG)
