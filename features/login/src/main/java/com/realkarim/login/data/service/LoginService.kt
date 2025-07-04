@@ -1,6 +1,5 @@
 package com.realkarim.login.data.service
 
-import com.realkarim.login.BuildConfig
 import com.realkarim.login.data.request.LoginRequestBody
 import com.realkarim.login.data.response.LoginResponse
 import kotlinx.coroutines.Deferred
@@ -14,14 +13,13 @@ const val EMAIL = "email"
 
 interface LoginService {
 
-    @POST("$BASE_URL/Auth/Login")
-    fun login(
-        @Body loginRequestBody: LoginRequestBody
-    ): Deferred<Response<LoginResponse>>
+  @POST("$BASE_URL/Auth/Login")
+  fun login(
+    @Body loginRequestBody: LoginRequestBody,
+  ): Deferred<Response<LoginResponse>>
 
-
-    @POST("$BASE_URL/Auth/ForgetPassword")
-    fun forgetPassword(
-        @Query(EMAIL) email: String
-    ): Deferred<Response<Unit>>
+  @POST("$BASE_URL/Auth/ForgetPassword")
+  fun forgetPassword(
+    @Query(EMAIL) email: String,
+  ): Deferred<Response<Unit>>
 }

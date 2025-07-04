@@ -2,7 +2,7 @@ package com.realkarim.data
 
 import okhttp3.OkHttpClient
 
-interface OkHttpClientProviderInterface {
+interface OkHttpClientProvider {
 
   fun getOkHttpClient(pin: String): OkHttpClient.Builder
 

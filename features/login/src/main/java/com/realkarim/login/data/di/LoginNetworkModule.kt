@@ -12,9 +12,9 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class LoginNetworkModule {
 
-    @Provides
-    @Singleton
-    fun provideLoginServiceFactory(serviceFactory: ServiceFactory): LoginService {
-        return serviceFactory.create(LoginService::class.java)
-    }
+  @Provides
+  @Singleton
+  fun provideLoginServiceFactory(serviceFactory: ServiceFactory): LoginService {
+    return serviceFactory.create(LoginService::class.java)
+  }
 }
