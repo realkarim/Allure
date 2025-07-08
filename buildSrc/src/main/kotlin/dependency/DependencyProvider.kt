@@ -11,6 +11,12 @@ fun DependencyHandler.room() {
     kapt(Dependencies.ROOM_COMPILER)
 }
 
+fun DependencyHandler.dataStore() {
+    implementation(Dependencies.datastore)
+    implementation(Dependencies.kotlinCollections)
+    implementation(Dependencies.kotlinSerilaizations)
+}
+
 fun DependencyHandler.retrofit() {
     implementation(Dependencies.RETROFIT)
     implementation(Dependencies.RETROFIT_CONVERTER_GSON)
@@ -76,4 +82,8 @@ fun DependencyHandler.loginModule() {
 
 fun DependencyHandler.homeModule() {
     moduleImplementation(project(":features:home"))
+}
+
+fun DependencyHandler.dataStoreModule() {
+    moduleImplementation(project(":core:datastore"))
 }

@@ -4,6 +4,8 @@ import buildutils.BuildDimensions
 import dependency.DependenciesVersions
 import dependency.androidx
 import dependency.dataModule
+import dependency.dataStore
+import dependency.dataStoreModule
 import dependency.domainModule
 import dependency.hilt
 import dependency.loginModule
@@ -101,8 +103,10 @@ android {
 dependencies {
   loginModule()
   dataModule()
-  domainModule() // May not be needed
+  domainModule()
+  dataStoreModule() // Ideally hide it behind domainModule
   presentationModule()
+  dataStore() // Find a way to remove this dependency, maybe wrap it in a dataStoreModule
   androidx()
   hilt()
   room()

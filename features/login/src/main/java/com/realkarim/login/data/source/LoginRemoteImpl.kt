@@ -11,8 +11,7 @@ import com.realkarim.login.domain.model.User
 class LoginRemoteImpl(
   private val networkDataSource: NetworkDataSource<LoginService>,
   private val loginMapper: LoginMapper,
-) :
-  LoginRemote {
+) : LoginRemote {
   override suspend fun login(loginRequestBody: LoginRequestBody): OutCome<User> {
     return networkDataSource.performRequest(
       request = { login(loginRequestBody).await() },
