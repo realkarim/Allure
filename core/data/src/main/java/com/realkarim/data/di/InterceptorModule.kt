@@ -1,7 +1,12 @@
 package com.realkarim.data.di
 
+import android.content.Context
+import com.chuckerteam.chucker.api.ChuckerCollector
+import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.chuckerteam.chucker.api.RetentionManager
 import com.realkarim.data.AUTHORIZATION_HEADER
 import com.realkarim.data.BuildConfig
+import com.realkarim.data.CHUCKER_INTERCEPTOR_TAG
 import com.realkarim.data.CLIENT_ID_HEADER
 import com.realkarim.data.HEADER_INTERCEPTOR_TAG
 import com.realkarim.data.HeaderInterceptor
@@ -11,6 +16,7 @@ import com.realkarim.data.OkHttpClientProviderImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Call
 import okhttp3.Interceptor
@@ -75,6 +81,34 @@ class InterceptorModule {
       .connectTimeout(60, TimeUnit.SECONDS)
       .readTimeout(60, TimeUnit.SECONDS)
       .writeTimeout(60, TimeUnit.SECONDS)
+      .build()
+  }
+
+  @Provides
+  @Singleton
+  @Named(CHUCKER_INTERCEPTOR_TAG)
+  fun provideChuckerInterceptor(@ApplicationContext context: Context): Interceptor {
+    return ChuckerInterceptor.Builder(context)
+      // The previously created Collector
+      .collector(
+        ChuckerCollector(
+          context = context,
+          showNotification = true,
+          retentionPeriod = RetentionManager.Period.ONE_HOUR,
+        ),
+      )
+      // The max body content length in bytes, after this responses will be truncated.
+      .maxContentLength(250_000L)
+      // List of headers to replace with ** in the Chucker UI
+      .redactHeaders(AUTHORIZATION_HEADER)
+      // Read the whole response body even when the client does not consume the response completely.
+      // This is useful in case of parsing errors or when the response body
+      // is closed before being read like in Retrofit with Void and Unit types.
+      .alwaysReadResponseBody(true)
+      // Use decoder when processing request and response bodies. When multiple decoders are installed they
+      // are applied in an order they were added.
+      // Controls Android shortcut creation.
+      .createShortcut(true)
       .build()
   }
 }

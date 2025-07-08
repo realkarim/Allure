@@ -28,6 +28,11 @@ fun DependencyHandler.okHttp() {
     implementation(Dependencies.OKHTTP_LOGGING_INTERCEPTOR)
 }
 
+fun DependencyHandler.chucker() {
+    releaseImplementation(Dependencies.chuckerRelease)
+    debugImplementation(Dependencies.chuckerDebug)
+}
+
 fun DependencyHandler.hilt() {
     implementation(Dependencies.HILT_ANDROID)
     implementation(Dependencies.HILT_COMPOSE)

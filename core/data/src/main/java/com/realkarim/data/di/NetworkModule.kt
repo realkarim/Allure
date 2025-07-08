@@ -4,6 +4,7 @@ import android.content.Context
 import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.realkarim.data.BuildConfig
+import com.realkarim.data.CHUCKER_INTERCEPTOR_TAG
 import com.realkarim.data.HEADER_INTERCEPTOR_TAG
 import com.realkarim.data.LOGGING_INTERCEPTOR_TAG
 import com.realkarim.data.OkHttpClientProvider
@@ -47,11 +48,13 @@ class NetworkModule {
   fun provideOkHttpCallFactory(
     @Named(HEADER_INTERCEPTOR_TAG) headerInterceptor: Interceptor,
     @Named(LOGGING_INTERCEPTOR_TAG) okHttpLoggingInterceptor: Interceptor,
+    @Named(CHUCKER_INTERCEPTOR_TAG) chuckerInterceptor: Interceptor,
     okHttpClientProvider: OkHttpClientProvider,
   ): OkHttpClient {
     return okHttpClientProvider.getOkHttpClient(BuildConfig.PIN_CERTIFICATE)
       .addInterceptor(okHttpLoggingInterceptor)
       .addInterceptor(headerInterceptor)
+      .addInterceptor(chuckerInterceptor)
       .retryOnConnectionFailure(true)
       .followRedirects(false)
       .followSslRedirects(false)
