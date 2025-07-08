@@ -4,12 +4,12 @@ import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
-import com.realkarim.data.AUTHORIZATION_HEADER
+import com.realkarim.data.interceptor.AUTHORIZATION_HEADER
 import com.realkarim.data.BuildConfig
 import com.realkarim.data.CHUCKER_INTERCEPTOR_TAG
-import com.realkarim.data.CLIENT_ID_HEADER
+import com.realkarim.data.interceptor.CLIENT_ID_HEADER
 import com.realkarim.data.HEADER_INTERCEPTOR_TAG
-import com.realkarim.data.HeaderInterceptor
+import com.realkarim.data.interceptor.HeaderInterceptor
 import com.realkarim.data.LOGGING_INTERCEPTOR_TAG
 import com.realkarim.data.OkHttpClientProvider
 import com.realkarim.data.OkHttpClientProviderImpl

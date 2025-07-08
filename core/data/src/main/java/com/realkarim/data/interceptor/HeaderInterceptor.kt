@@ -1,4 +1,4 @@
-package com.realkarim.data
+package com.realkarim.data.interceptor
 
 import okhttp3.Interceptor
 import okhttp3.Response
