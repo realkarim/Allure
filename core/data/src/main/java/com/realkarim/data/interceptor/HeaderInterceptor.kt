@@ -18,7 +18,6 @@ const val ENGLISH_LANGUAGE = "en-US"
 
 class HeaderInterceptor(
   private val clientId: String,
-  private val accessTokenProvider: () -> String?,
   private val languageProvider: () -> Locale,
 ) : Interceptor {
   override fun intercept(chain: Interceptor.Chain): Response {
@@ -36,10 +35,6 @@ class HeaderInterceptor(
       .header(ACCEPT_HEADER, JSON)
       .header(CONTENT_TYPE_HEADER, JSON)
       .header(ACCEPT_LANGUAGE_HEADER, language)
-
-    accessTokenProvider()?.let {
-      requestBuilder.header(AUTHORIZATION_HEADER, "Bearer $it")
-    }
 
     return chain.proceed(requestBuilder.build())
   }

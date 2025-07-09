@@ -4,7 +4,6 @@ import com.google.gson.Gson
 import com.realkarim.data.DISPATCHER_DEFAULT_TAG
 import com.realkarim.data.ServiceFactory
 import com.realkarim.data.USER_ID_TAG
-import com.realkarim.data.connectivity.NetworkMonitor
 import com.realkarim.data.source.NetworkDataSource
 import com.realkarim.login.data.service.LoginService
 import com.realkarim.login.data.source.LoginRemote
@@ -34,10 +33,9 @@ class LoginNetworkModule {
   fun provideNetworkDataSource(
     loginService: LoginService,
     gson: Gson,
-    networkMonitorInterface: NetworkMonitor,
     @Named(USER_ID_TAG) userIdProvider: () -> String,
   ): NetworkDataSource<LoginService> {
-    return NetworkDataSource(loginService, gson, networkMonitorInterface, userIdProvider)
+    return NetworkDataSource(loginService, gson, userIdProvider)
   }
 
   @Provides

@@ -4,20 +4,28 @@ import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
+import com.realkarim.data.AUTHENTICATION_INTERCEPTOR_TAG
 import com.realkarim.data.BuildConfig
 import com.realkarim.data.CHUCKER_INTERCEPTOR_TAG
+import com.realkarim.data.CONNECTIVITY_INTERCEPTOR_TAG
+import com.realkarim.data.DISPATCHER_IO_TAG
 import com.realkarim.data.HEADER_INTERCEPTOR_TAG
 import com.realkarim.data.LOGGING_INTERCEPTOR_TAG
 import com.realkarim.data.OkHttpClientProvider
 import com.realkarim.data.OkHttpClientProviderImpl
+import com.realkarim.data.connectivity.NetworkMonitor
 import com.realkarim.data.interceptor.AUTHORIZATION_HEADER
+import com.realkarim.data.interceptor.AuthenticationInterceptor
 import com.realkarim.data.interceptor.CLIENT_ID_HEADER
+import com.realkarim.data.interceptor.ConnectivityInterceptor
 import com.realkarim.data.interceptor.HeaderInterceptor
+import com.realkarim.protodatastore.manager.session.SessionDataStore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
 import okhttp3.Call
 import okhttp3.Interceptor
 import okhttp3.logging.HttpLoggingInterceptor
@@ -34,13 +42,35 @@ class InterceptorModule {
   @Named(HEADER_INTERCEPTOR_TAG)
   fun provideHeaderInterceptor(
     @Named("ClientId") clientId: String,
-    @Named("AccessToken") accessTokenProvider: () -> String?,
     @Named("Language") languageProvider: () -> Locale,
   ): Interceptor {
     return HeaderInterceptor(
       clientId,
-      accessTokenProvider,
       languageProvider,
+    )
+  }
+
+  @Provides
+  @Singleton
+  @Named(AUTHENTICATION_INTERCEPTOR_TAG)
+  fun provideAuthenticationInterceptor(
+    sessionDataStore: SessionDataStore,
+    @Named(DISPATCHER_IO_TAG) coroutineDispatcher: CoroutineDispatcher,
+  ): Interceptor {
+    return AuthenticationInterceptor(
+      sessionDataStore,
+      coroutineDispatcher,
+    )
+  }
+
+  @Provides
+  @Singleton
+  @Named(CONNECTIVITY_INTERCEPTOR_TAG)
+  fun provideConnectivityInterceptor(
+    networkMonitorInterface: NetworkMonitor,
+  ): Interceptor {
+    return ConnectivityInterceptor(
+      networkMonitorInterface,
     )
   }
 

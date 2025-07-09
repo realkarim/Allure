@@ -3,8 +3,10 @@ package com.realkarim.data.di
 import android.content.Context
 import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.realkarim.data.AUTHENTICATION_INTERCEPTOR_TAG
 import com.realkarim.data.BuildConfig
 import com.realkarim.data.CHUCKER_INTERCEPTOR_TAG
+import com.realkarim.data.CONNECTIVITY_INTERCEPTOR_TAG
 import com.realkarim.data.HEADER_INTERCEPTOR_TAG
 import com.realkarim.data.LOGGING_INTERCEPTOR_TAG
 import com.realkarim.data.OkHttpClientProvider
@@ -12,6 +14,7 @@ import com.realkarim.data.OkHttpClientProviderImpl
 import com.realkarim.data.ServiceFactory
 import com.realkarim.data.connectivity.NetworkMonitor
 import com.realkarim.data.connectivity.NetworkMonitorImpl
+import com.realkarim.data.service.SessionService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -49,12 +52,16 @@ class NetworkModule {
     @Named(HEADER_INTERCEPTOR_TAG) headerInterceptor: Interceptor,
     @Named(LOGGING_INTERCEPTOR_TAG) okHttpLoggingInterceptor: Interceptor,
     @Named(CHUCKER_INTERCEPTOR_TAG) chuckerInterceptor: Interceptor,
+    @Named(AUTHENTICATION_INTERCEPTOR_TAG) authenticationInterceptor: Interceptor,
+    @Named(CONNECTIVITY_INTERCEPTOR_TAG) connectivityInterceptor: Interceptor,
     okHttpClientProvider: OkHttpClientProvider,
   ): OkHttpClient {
     return okHttpClientProvider.getOkHttpClient(BuildConfig.PIN_CERTIFICATE)
       .addInterceptor(okHttpLoggingInterceptor)
       .addInterceptor(headerInterceptor)
       .addInterceptor(chuckerInterceptor)
+      .addInterceptor(authenticationInterceptor)
+      .addInterceptor(connectivityInterceptor)
       .retryOnConnectionFailure(true)
       .followRedirects(false)
       .followSslRedirects(false)
@@ -78,5 +85,11 @@ class NetworkModule {
   @Singleton
   fun provideServiceFactory(retrofit: Retrofit): ServiceFactory {
     return ServiceFactory(retrofit)
+  }
+
+  @Provides
+  @Singleton
+  fun providesSessionService(serviceFactory: ServiceFactory): SessionService {
+    return serviceFactory.create(SessionService::class.java)
   }
 }
