@@ -17,5 +17,6 @@ dependencies {
     implementation("com.github.ben-manes:gradle-versions-plugin:0.51.0")
     implementation("org.jetbrains.dokka:dokka-gradle-plugin:2.0.0")
     implementation("org.jetbrains.dokka:kotlin-as-java-plugin:2.0.0")
-    implementation("org.jetbrains.kotlin:kotlin-serialization:2.0.21")
+    implementation("org.jetbrains.kotlin:kotlin-serialization:2.2.0")
+    implementation("com.google.protobuf:protobuf-gradle-plugin:0.9.5")
 }

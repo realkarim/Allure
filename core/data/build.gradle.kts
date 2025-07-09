@@ -2,6 +2,7 @@ import dependency.chucker
 import dependency.dataStore
 import dependency.hilt
 import dependency.okHttp
+import dependency.protoDataStoreModule
 import dependency.retrofit
 import dependency.testDebugDeps
 import dependency.testDeps
@@ -20,6 +21,7 @@ apply<SharedLibraryGradlePlugin>()
 
 dependencies {
   okHttp()
+  protoDataStoreModule()
   retrofit()
   hilt()
   dataStore()

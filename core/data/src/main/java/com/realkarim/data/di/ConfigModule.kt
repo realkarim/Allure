@@ -4,13 +4,19 @@ import com.realkarim.data.ACCESS_TOKEN_TAG
 import com.realkarim.data.CLIENT_ID_TAG
 import com.realkarim.data.LANGUAGE_TAG
 import com.realkarim.data.USER_ID_TAG
+import com.realkarim.protodatastore.manager.preference.PreferencesDataStore
+import com.realkarim.protodatastore.manager.session.SessionDataStore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.runBlocking
 import java.util.Locale
+import java.util.UUID
 import javax.inject.Named
 import javax.inject.Singleton
+
+// todo: Find a better way to handle this without runBlocking.
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -19,28 +25,35 @@ class ConfigModule {
   @Provides
   @Singleton
   @Named(USER_ID_TAG)
-  fun provideUserId(): () -> String? {
-    return { "" } // todo get user id from user prefs later
+  fun provideUserId(sessionDataStore: SessionDataStore): () -> String? {
+    val userId = runBlocking { sessionDataStore.getUserId() }
+    return { userId }
   }
 
   @Provides
   @Singleton
   @Named(LANGUAGE_TAG)
-  fun provideLanguage(): () -> Locale {
-    return { Locale.ENGLISH } // todo get locale from user prefs later, move me to config module
+  fun provideLanguage(preferenceDataStore: PreferencesDataStore): () -> Locale {
+    val language = runBlocking { preferenceDataStore.getLanguage() }
+    return if (language.isNotEmpty()) {
+      { Locale(language) }
+    } else {
+      { Locale.ENGLISH }
+    }
   }
 
   @Provides
   @Singleton
   @Named(ACCESS_TOKEN_TAG)
-  fun provideAccessToken(): () -> String? {
-    return { "" } // todo get access token from user prefs later, move me to config module
+  fun provideAccessToken(sessionDataStore: SessionDataStore): () -> String? {
+    val accessToken = runBlocking { sessionDataStore.getAccessToken() }
+    return { accessToken }
   }
 
   @Provides
   @Singleton
   @Named(CLIENT_ID_TAG)
   fun provideClientId(): String {
-    return "" // todo get client id from user prefs later, move me to config module
+    return UUID.randomUUID().toString()
   }
 }

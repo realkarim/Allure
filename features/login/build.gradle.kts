@@ -20,7 +20,6 @@ apply<SharedLibraryGradlePlugin>()
 
 dependencies {
   dataModule()
-
   androidx()
   retrofit()
   hilt()

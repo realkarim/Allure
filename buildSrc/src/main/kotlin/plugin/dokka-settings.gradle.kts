@@ -61,7 +61,7 @@ tasks {
                     // URL showing where the source code can be accessed through the web browser
                     remoteUrl.set(
                         java.net.URL(
-                            "https://github.com/minafarideleia/AdvancedMultiModularArchitecture"
+                            "https://github.com/realkarim/Allure"
                         )
                     )
                     // Suffix which is used to append the line number to the URL. Use #L for GitHub
@@ -84,7 +84,7 @@ tasks {
                 // Repeat for multiple links
                 externalDocumentationLink {
                     // Root URL of the generated documentation to link with. The trailing slash is required!
-                    url.set(URL("https://github.com/minafarideleia/AdvancedMultiModularArchitecture/docs"))
+                    url.set(URL("https://github.com/realkarim/Allure/docs"))
 
                     // If package-list file is located in non-standard location
                     // packageListUrl = URL("file:///home/user/localdocs/package-list")

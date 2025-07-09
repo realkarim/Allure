@@ -11,6 +11,8 @@ import dependency.hilt
 import dependency.loginModule
 import dependency.okHttp
 import dependency.presentationModule
+import dependency.protoDataStore
+import dependency.protoDataStoreModule
 import dependency.retrofit
 import dependency.room
 import dependency.testDebugDeps
@@ -98,6 +100,11 @@ android {
     compose = true
     buildConfig = true
   }
+
+  hilt {
+    // Fix issue with :app:hiltAggregateDepsConsumerGoogleDebug
+    enableAggregatingTask = false
+  }
 }
 
 dependencies {
@@ -105,8 +112,10 @@ dependencies {
   dataModule()
   domainModule()
   dataStoreModule() // Ideally hide it behind domainModule
+  protoDataStoreModule()
   presentationModule()
   dataStore() // Find a way to remove this dependency, maybe wrap it in a dataStoreModule
+  protoDataStore()
   androidx()
   hilt()
   room()

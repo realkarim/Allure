@@ -92,3 +92,13 @@ fun DependencyHandler.homeModule() {
 fun DependencyHandler.dataStoreModule() {
     moduleImplementation(project(":core:datastore"))
 }
+
+fun DependencyHandler.protoDataStoreModule() {
+    moduleImplementation(project(":core:protodatastore"))
+}
+
+fun DependencyHandler.protoDataStore() {
+    implementation(Dependencies.datastore)
+    implementation(Dependencies.protoBufJavaLite)
+    implementation(Dependencies.protoBufKotlinLite)
+}

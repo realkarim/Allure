@@ -10,7 +10,7 @@ plugins {
 apply<SharedLibraryGradlePlugin>()
 
 android {
-  namespace = "com.minafarid.datastore"
+  namespace = "com.realkarim.datastore"
 }
 
 dependencies {

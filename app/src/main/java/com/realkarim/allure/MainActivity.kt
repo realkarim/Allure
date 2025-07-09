@@ -9,13 +9,18 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -27,14 +32,25 @@ import com.realkarim.datastore.settings.AppSettings
 import com.realkarim.datastore.settings.AppSettingsSerializer
 import com.realkarim.datastore.settings.Language
 import com.realkarim.datastore.settings.Location
+import com.realkarim.protodatastore.manager.preference.PreferencesDataStore
+import com.realkarim.protodatastore.manager.session.SessionDataStore
+import dagger.hilt.android.AndroidEntryPoint
+import jakarta.inject.Inject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
   lateinit var appSettingDataStore: DataStore<AppSettings>
+
+  @Inject
+  lateinit var preferencesDataStore: PreferencesDataStore
+
+  @Inject
+  lateinit var sessionDataStore: SessionDataStore
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -49,7 +65,11 @@ class MainActivity : ComponentActivity() {
     setContent {
       AllureTheme {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-          SettingsScreen(appSettingDataStore, modifier = Modifier.padding(innerPadding))
+          SettingsScreen(
+            sessionDataStore,
+            appSettingDataStore,
+            Modifier.padding(innerPadding),
+          )
         }
       }
     }
@@ -86,10 +106,42 @@ fun Greetings(name: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun SettingsScreen(appSettingDataStore: DataStore<AppSettings>, modifier: Modifier) {
+fun SettingsScreen(
+  sessionDataStore: SessionDataStore,
+  appSettingDataStore: DataStore<AppSettings>,
+  modifier: Modifier,
+) {
   val scope = rememberCoroutineScope()
   val appSettings by appSettingDataStore.data.collectAsState(initial = AppSettings())
+
+  val accessTokenFlow by sessionDataStore.getAccessTokenFlow()
+    .collectAsState(initial = "")
+
+  var accessTokenValue by remember { mutableStateOf("") }
+
   Column(modifier = modifier.padding(50.dp)) {
+    Spacer(modifier = Modifier.height(16.dp))
+    Text(text = "accessTokenFlow: $accessTokenFlow")
+    Spacer(modifier = Modifier.height(16.dp))
+
+    LaunchedEffect(Unit) {
+      scope.launch {
+        accessTokenValue = sessionDataStore.getAccessToken()
+      }
+    }
+
+    Text(text = "accessTokenValue: $accessTokenValue")
+
+    Spacer(modifier = Modifier.height(16.dp))
+
+    Button(onClick = {
+      scope.launch {
+        sessionDataStore.setAccessToken("Access Token " + System.currentTimeMillis())
+      }
+    }) {
+      Text(text = "Insert")
+    }
+
     // display saved language
     Text(text = "Language: " + appSettings.language)
     Spacer(modifier = Modifier.height(16.dp))
