@@ -5,11 +5,11 @@ import com.realkarim.data.DISPATCHER_DEFAULT_TAG
 import com.realkarim.data.ServiceFactory
 import com.realkarim.data.USER_ID_TAG
 import com.realkarim.data.source.NetworkDataSource
+import com.realkarim.login.data.mapper.LoginMapper
+import com.realkarim.login.data.mapper.LoginMapperImpl
 import com.realkarim.login.data.service.LoginService
-import com.realkarim.login.data.source.LoginRemote
+import com.realkarim.login.domain.source.LoginRemote
 import com.realkarim.login.data.source.LoginRemoteImpl
-import com.realkarim.login.domain.mapper.LoginMapper
-import com.realkarim.login.domain.mapper.LoginMapperImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

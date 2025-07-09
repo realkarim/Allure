@@ -1,4 +1,4 @@
-package com.realkarim.login.domain.mapper
+package com.realkarim.login.data.mapper
 
 import com.realkarim.login.data.response.LoginResponse
 import com.realkarim.login.domain.model.User

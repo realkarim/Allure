@@ -1,4 +1,4 @@
-package com.realkarim.data.model
+package com.realkarim.domain.model
 
 // Used to map error messages from the API to a domain format
 data class ErrorMessage(

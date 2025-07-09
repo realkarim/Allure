@@ -1,6 +1,7 @@
-package com.realkarim.data.result
+package com.realkarim.domain.result
 
-import com.realkarim.data.model.ErrorMessage
+import com.realkarim.domain.model.ErrorMessage
+import com.realkarim.domain.usecase.UseCase
 
 sealed class OutCome<T> {
   abstract fun isSuccess(): Boolean

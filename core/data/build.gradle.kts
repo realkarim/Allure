@@ -1,5 +1,6 @@
 import dependency.chucker
 import dependency.dataStore
+import dependency.domainModule
 import dependency.hilt
 import dependency.okHttp
 import dependency.protoDataStoreModule
@@ -20,6 +21,7 @@ android {
 apply<SharedLibraryGradlePlugin>()
 
 dependencies {
+  domainModule()
   okHttp()
   protoDataStoreModule()
   retrofit()

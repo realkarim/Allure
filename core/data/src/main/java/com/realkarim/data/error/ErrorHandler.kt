@@ -1,17 +1,7 @@
 package com.realkarim.data.error
 
 import com.google.gson.Gson
-import com.realkarim.data.model.ErrorMessage
 import com.realkarim.data.response.ErrorResponse
-
-// mapping errorResponse to ErrorMessage model
-fun ErrorResponse.toDomain(code: Int): ErrorMessage {
-  return ErrorMessage(
-    code = code,
-    message = errorMessage.orEmpty(),
-    errorFieldList = errorFieldList ?: emptyList(),
-  )
-}
 
 // Return a default error response in case we didn't get a valid response
 fun getDefaultErrorResponse() = ErrorResponse("", "", emptyList())

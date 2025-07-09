@@ -4,15 +4,15 @@ import com.google.gson.Gson
 import com.realkarim.data.HEADER_LOCATION
 import com.realkarim.data.error.getDefaultErrorResponse
 import com.realkarim.data.error.getErrorResponse
-import com.realkarim.data.error.toDomain
 import com.realkarim.data.interceptor.NoConnectivityException
+import com.realkarim.data.mapper.toDomain
 import com.realkarim.data.response.ErrorResponse
-import com.realkarim.data.result.OutCome
 import com.realkarim.data.source.DataSource.Companion.NO_INTERNET
 import com.realkarim.data.source.DataSource.Companion.SEE_OTHERS
 import com.realkarim.data.source.DataSource.Companion.SSL_PINNING
 import com.realkarim.data.source.DataSource.Companion.TIMEOUT
 import com.realkarim.data.source.DataSource.Companion.UNKNOWN
+import com.realkarim.domain.result.OutCome
 import kotlinx.coroutines.isActive
 import okhttp3.Headers
 import retrofit2.Response

@@ -1,6 +1,7 @@
-package com.realkarim.data.result
+package com.realkarim.domain.usecase
 
-import com.realkarim.data.model.ErrorMessage
+import com.realkarim.domain.model.ErrorMessage
+import com.realkarim.domain.result.OutCome
 
 interface UseCase<R> {
 

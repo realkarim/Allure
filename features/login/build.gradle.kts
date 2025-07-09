@@ -1,5 +1,6 @@
 import dependency.androidx
 import dependency.dataModule
+import dependency.domainModule
 import dependency.hilt
 import dependency.retrofit
 import dependency.room
@@ -19,6 +20,7 @@ android {
 apply<SharedLibraryGradlePlugin>()
 
 dependencies {
+  domainModule()
   dataModule()
   androidx()
   retrofit()

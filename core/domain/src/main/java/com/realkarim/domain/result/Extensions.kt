@@ -1,4 +1,4 @@
-package com.realkarim.data.result
+package com.realkarim.domain.result
 
 import kotlinx.coroutines.isActive
 import kotlin.coroutines.coroutineContext
