@@ -2,15 +2,19 @@ package com.realkarim.login.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.realkarim.login.domain.model.User
 import com.realkarim.login.domain.usecase.LoginUseCase
 import com.realkarim.login.presentation.action.LoginInput
 import com.realkarim.login.presentation.action.LoginOutput
 import com.realkarim.login.presentation.action.LoginUiState
 import com.realkarim.login.presentation.error.LoginError
 import com.realkarim.login.presentation.validator.LoginValidator
+import com.realkarim.presentation.StateRenderer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
@@ -19,7 +23,12 @@ class LoginViewModel @Inject constructor(
   private val loginUseCase: LoginUseCase,
 ) : ViewModel() {
 
-  var loginUiState = LoginUiState()
+  private var loginUiState = LoginUiState()
+
+  private val _stateRendererMutableState = MutableStateFlow<StateRenderer<LoginUiState, User>>(
+    StateRenderer.ScreenContent(loginUiState),
+  )
+  val stateRendererFlow: StateFlow<StateRenderer<LoginUiState, User>> get() = _stateRendererMutableState
 
   // Just trying with channel, usually we would use StateFlow or LiveData
   private val _viewOutput: Channel<LoginOutput> = Channel()
@@ -49,6 +58,9 @@ class LoginViewModel @Inject constructor(
       userNameError = userNameError,
       passwordError = passwordError,
     )
+
+    val newStateRenderer = StateRenderer.ScreenContent<LoginUiState, User>(loginUiState)
+    _stateRendererMutableState.value = newStateRenderer
   }
 
   private fun sendOutput(action: () -> LoginOutput) {
@@ -59,14 +71,25 @@ class LoginViewModel @Inject constructor(
 
   fun login() {
     viewModelScope.launch {
+      // loading popup state
+      val newStateRenderer = StateRenderer.LoadingPopup<LoginUiState, User>(loginUiState)
+      _stateRendererMutableState.value = newStateRenderer
       loginUseCase.execute(
         LoginUseCase.Input(
           username = loginUiState.userName,
           password = loginUiState.password,
         ),
         success = {
+          // loading popup state
+          val newStateRenderer = StateRenderer.Success<LoginUiState, User>(it)
+          _stateRendererMutableState.value = newStateRenderer
         },
-        error = {},
+        error = {
+          // loading popup state
+          val newStateRenderer =
+            StateRenderer.ErrorPopup<LoginUiState, User>(loginUiState, it)
+          _stateRendererMutableState.value = newStateRenderer
+        },
       )
     }
   }

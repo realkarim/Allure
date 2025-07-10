@@ -12,10 +12,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,11 +25,11 @@ import com.realkarim.login.presentation.LoginViewModel
 import com.realkarim.login.presentation.action.LoginInput
 import com.realkarim.login.presentation.action.LoginOutput
 import com.realkarim.login.presentation.action.LoginUiState
+import com.realkarim.presentation.StateRenderer
 
 @Composable
-fun LoginScreen(loginUiState: LoginUiState, loginViewModel: LoginViewModel) {
-  var userNameValue by remember { mutableStateOf("") }
-  var passwordValue by remember { mutableStateOf("") }
+fun LoginScreen(loginViewModel: LoginViewModel) {
+  val stateRenderer by loginViewModel.stateRendererFlow.collectAsState()
 
   LaunchedEffect(loginViewModel) {
     loginViewModel.viewOutput.collect { output ->
@@ -43,6 +41,26 @@ fun LoginScreen(loginUiState: LoginUiState, loginViewModel: LoginViewModel) {
     }
   }
 
+  StateRenderer.of(statRenderer = stateRenderer, retryAction = { loginViewModel.login() }) {
+    onUiState { updatedState ->
+      LoginScreen(updatedState, loginViewModel)
+    }
+    onLoadingState { updatedState ->
+      LoginScreen(updatedState, loginViewModel)
+    }
+    onSuccessState {
+      println(it.fullName)
+    }
+    onEmptyState {
+    }
+    onErrorState { updatedState ->
+      LoginScreen(updatedState, loginViewModel)
+    }
+  }
+}
+
+@Composable
+fun LoginScreen(loginUiState: LoginUiState, loginViewModel: LoginViewModel) {
   Surface(modifier = Modifier.fillMaxSize()) {
     Column(
       modifier = Modifier.padding(16.dp),
@@ -51,22 +69,20 @@ fun LoginScreen(loginUiState: LoginUiState, loginViewModel: LoginViewModel) {
     ) {
       CustomTextField(
         label = stringResource(id = R.string.username_label),
-        value = userNameValue, // loginViewState.userName,
+        value = loginUiState.userName,
         errorText = stringResource(id = loginUiState.userNameError.getErrorMessage()),
         showError = loginUiState.showUsernameError(),
       ) { userName ->
-        // loginViewModel.setInput(LoginInput.UserNameUpdated(userName))
-        userNameValue = userName
+        loginViewModel.setInput(LoginInput.UserNameUpdated(userName))
       }
       Spacer(modifier = Modifier.height(16.dp))
       CustomTextField(
         label = stringResource(id = R.string.password_label),
-        value = passwordValue, // loginViewState.password,
+        value = loginUiState.password,
         errorText = stringResource(id = loginUiState.passwordError.getErrorMessage()),
         showError = loginUiState.showPasswordError(),
       ) { password ->
-        // loginViewModel.setInput(LoginInput.PasswordUpdated(password))
-        passwordValue = password
+        loginViewModel.setInput(LoginInput.PasswordUpdated(password))
       }
       Spacer(modifier = Modifier.height(16.dp))
 

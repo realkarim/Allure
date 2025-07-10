@@ -2,6 +2,7 @@ import dependency.androidx
 import dependency.dataModule
 import dependency.domainModule
 import dependency.hilt
+import dependency.presentationModule
 import dependency.retrofit
 import dependency.room
 import dependency.testDebugDeps
@@ -36,6 +37,7 @@ apply<SharedLibraryGradlePlugin>()
 dependencies {
   domainModule()
   dataModule()
+  presentationModule()
   androidx()
   retrofit()
   hilt()

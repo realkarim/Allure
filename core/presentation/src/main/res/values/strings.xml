@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <string name="loading">Loading…</string>
+    <string name="no_data">No Data Available</string>
+    <string name="cannot_proceed">Cannot Proceed</string>
+    <string name="retry_again">Retry Again</string>
+    <string name="no_result">No Result</string>
+    <string name="dimiss">Dismiss</string>
+</resources>
