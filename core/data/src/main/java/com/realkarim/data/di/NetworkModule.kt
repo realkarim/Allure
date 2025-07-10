@@ -14,6 +14,7 @@ import com.realkarim.data.OkHttpClientProviderImpl
 import com.realkarim.data.ServiceFactory
 import com.realkarim.data.connectivity.NetworkMonitor
 import com.realkarim.data.connectivity.NetworkMonitorImpl
+import com.realkarim.data.service.BASE_URL
 import com.realkarim.data.service.SessionService
 import dagger.Module
 import dagger.Provides
@@ -22,6 +23,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
@@ -48,6 +50,8 @@ class NetworkModule {
     return OkHttpClientProviderImpl()
   }
 
+  @Provides
+  @Singleton
   fun provideOkHttpCallFactory(
     @Named(HEADER_INTERCEPTOR_TAG) headerInterceptor: Interceptor,
     @Named(LOGGING_INTERCEPTOR_TAG) okHttpLoggingInterceptor: Interceptor,
@@ -75,8 +79,9 @@ class NetworkModule {
   @Singleton
   fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
     val builder = Retrofit.Builder()
-      .baseUrl(BuildConfig.BASE_URL)
+      .baseUrl(BASE_URL)
       .client(okHttpClient)
+      .addConverterFactory(GsonConverterFactory.create())
       .addCallAdapterFactory(CoroutineCallAdapterFactory())
     return builder.build()
   }

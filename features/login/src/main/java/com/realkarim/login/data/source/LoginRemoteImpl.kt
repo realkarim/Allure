@@ -10,18 +10,18 @@ import com.realkarim.login.domain.model.User
 import com.realkarim.login.domain.source.LoginRemote
 
 class LoginRemoteImpl(
-    private val networkDataSource: NetworkDataSource<LoginService>,
-    private val loginMapper: LoginMapper,
+  private val networkDataSource: NetworkDataSource<LoginService>,
+  private val loginMapper: LoginMapper,
 ) : LoginRemote {
-    override suspend fun login(username: String, password: String): OutCome<User> {
-        return networkDataSource.performRequest(
-            request = {
-                login(
-                    LoginRequestBody(username = username, password = password)
-                ).await()
-            },
-            onSuccess = { response, _ -> OutCome.success(loginMapper.toDomain(response)) },
-            onError = { errorResponse, code -> OutCome.error(errorResponse.toDomain(code)) },
-        )
-    }
+  override suspend fun login(username: String, password: String): OutCome<User> {
+    return networkDataSource.performRequest(
+      request = {
+        login(
+          LoginRequestBody(username = username, password = password),
+        ).await()
+      },
+      onSuccess = { response, _ -> OutCome.success(loginMapper.toDomain(response)) },
+      onError = { errorResponse, code -> OutCome.error(errorResponse.toDomain(code)) },
+    )
+  }
 }

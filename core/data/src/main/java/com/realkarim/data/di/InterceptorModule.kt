@@ -11,8 +11,6 @@ import com.realkarim.data.CONNECTIVITY_INTERCEPTOR_TAG
 import com.realkarim.data.DISPATCHER_IO_TAG
 import com.realkarim.data.HEADER_INTERCEPTOR_TAG
 import com.realkarim.data.LOGGING_INTERCEPTOR_TAG
-import com.realkarim.data.OkHttpClientProvider
-import com.realkarim.data.OkHttpClientProviderImpl
 import com.realkarim.data.connectivity.NetworkMonitor
 import com.realkarim.data.interceptor.AUTHORIZATION_HEADER
 import com.realkarim.data.interceptor.AuthenticationInterceptor
@@ -26,11 +24,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
-import okhttp3.Call
 import okhttp3.Interceptor
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.Locale
-import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -89,29 +85,6 @@ class InterceptorModule {
       interceptor.redactHeader(AUTHORIZATION_HEADER) // redact any header that contains sensitive data.
     }
     return interceptor
-  }
-
-  @Provides
-  @Singleton
-  fun provideOkHttpClientProvider(): OkHttpClientProvider {
-    return OkHttpClientProviderImpl()
-  }
-
-  fun provideOkHttpCallFactory(
-    @Named(HEADER_INTERCEPTOR_TAG) headerInterceptor: Interceptor,
-    @Named(LOGGING_INTERCEPTOR_TAG) okHttpLoggingInterceptor: Interceptor,
-    okHttpClientProvider: OkHttpClientProvider,
-  ): Call.Factory {
-    return okHttpClientProvider.getOkHttpClient(BuildConfig.PIN_CERTIFICATE)
-      .addInterceptor(okHttpLoggingInterceptor)
-      .addInterceptor(headerInterceptor)
-      .retryOnConnectionFailure(true)
-      .followRedirects(false)
-      .followSslRedirects(false)
-      .connectTimeout(60, TimeUnit.SECONDS)
-      .readTimeout(60, TimeUnit.SECONDS)
-      .writeTimeout(60, TimeUnit.SECONDS)
-      .build()
   }
 
   @Provides

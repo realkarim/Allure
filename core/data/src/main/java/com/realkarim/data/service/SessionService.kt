@@ -12,12 +12,12 @@ const val REFRESH_TOKEN = "refreshToken"
 
 interface SessionService {
 
-  @GET("${BASE_URL}Auth/GetSession")
+  @GET("/Auth/GetSession")
   fun getTokens(
     @Header(REFRESH_TOKEN) refreshToken: String,
   ): Deferred<Response<TokenResponse>>
 
-  @DELETE("${BASE_URL}Auth/DeleteSession")
+  @DELETE("/Auth/DeleteSession")
   fun logout(
     @Header(REFRESH_TOKEN) refreshToken: String,
   ): Deferred<Response<Unit>>

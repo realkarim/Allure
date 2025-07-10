@@ -8,8 +8,8 @@ import com.realkarim.data.source.NetworkDataSource
 import com.realkarim.login.data.mapper.LoginMapper
 import com.realkarim.login.data.mapper.LoginMapperImpl
 import com.realkarim.login.data.service.LoginService
-import com.realkarim.login.domain.source.LoginRemote
 import com.realkarim.login.data.source.LoginRemoteImpl
+import com.realkarim.login.domain.source.LoginRemote
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

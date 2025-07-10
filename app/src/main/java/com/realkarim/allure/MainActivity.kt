@@ -34,14 +34,13 @@ import com.realkarim.datastore.settings.Language
 import com.realkarim.datastore.settings.Location
 import com.realkarim.protodatastore.manager.preference.PreferencesDataStore
 import com.realkarim.protodatastore.manager.session.SessionDataStore
-import dagger.hilt.android.AndroidEntryPoint
 import jakarta.inject.Inject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
+// @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
   lateinit var appSettingDataStore: DataStore<AppSettings>

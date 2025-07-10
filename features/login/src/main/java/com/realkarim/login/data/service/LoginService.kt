@@ -8,18 +8,17 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.Query
 
-// todo: Replace with BuildConfig
 const val BASE_URL = "https://allure.com"
 const val EMAIL = "email"
 
 // todo: Consider removing the deferred return type
 interface LoginService {
-  @POST("$BASE_URL/Auth/Login")
+  @POST("/Auth/Login")
   fun login(
     @Body loginRequestBody: LoginRequestBody,
   ): Deferred<Response<LoginResponse>>
 
-  @POST("$BASE_URL/Auth/ForgetPassword")
+  @POST("/Auth/ForgetPassword")
   fun forgetPassword(
     @Query(EMAIL) email: String,
   ): Deferred<Response<Unit>>

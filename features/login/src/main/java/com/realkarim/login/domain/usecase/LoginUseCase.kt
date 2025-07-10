@@ -4,13 +4,15 @@ import com.realkarim.domain.result.OutCome
 import com.realkarim.domain.usecase.AsyncUseCase
 import com.realkarim.login.domain.model.User
 import com.realkarim.login.domain.source.LoginRemote
+import javax.inject.Inject
 
-class LoginUseCase(private val loginRemote: LoginRemote) :
-    AsyncUseCase<LoginUseCase.Input, User>() {
+class LoginUseCase @Inject constructor(
+  private val loginRemote: LoginRemote,
+) : AsyncUseCase<LoginUseCase.Input, User>() {
 
-    override suspend fun run(input: Input): OutCome<User> {
-        return loginRemote.login(username = input.username, password = input.password)
-    }
+  override suspend fun run(input: Input): OutCome<User> {
+    return loginRemote.login(username = input.username, password = input.password)
+  }
 
-    data class Input(val username: String, val password: String)
+  data class Input(val username: String, val password: String)
 }

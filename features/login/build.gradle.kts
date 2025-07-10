@@ -11,10 +11,24 @@ import plugin.SharedLibraryGradlePlugin
 
 plugins {
   id(plugin.BuildPlugins.ANDROID_LIBRARY)
+  /*
+    Fix issue:
+    Caused by: java.lang.RuntimeException: com.android.builder.errors.EvalIssueException: Starting in Kotlin 2.0, the Compose Compiler Gradle plugin is required
+   */
+  id(plugin.BuildPlugins.ANDROID_COMPOSE) version dependency.DependenciesVersions.COMPOSE_COMPILER
+  id(plugin.BuildPlugins.HILT) version dependency.DependenciesVersions.HILT
 }
 
 android {
   namespace = "com.realkarim.login"
+
+  composeOptions {
+    kotlinCompilerExtensionVersion = dependency.DependenciesVersions.KOTLIN_COMPILER
+  }
+
+  buildFeatures {
+    compose = true
+  }
 }
 
 apply<SharedLibraryGradlePlugin>()
