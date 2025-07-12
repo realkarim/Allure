@@ -57,6 +57,10 @@ fun DependencyHandler.androidx() {
     implementation(Dependencies.ANDROIDX_ACTIVITY)
     implementation(Dependencies.COMPOSE_MATERIAL)
     implementation(Dependencies.COMPOSE_RUNTIME)
+    implementation(Dependencies.navigation)
+    implementation(Dependencies.navigation2)
+    implementation(Dependencies.navigationFragmentKtx)
+    implementation(Dependencies.googleJson)
 }
 
 fun DependencyHandler.testDeps() {
@@ -106,4 +110,8 @@ fun DependencyHandler.protoDataStore() {
     implementation(Dependencies.datastore)
     implementation(Dependencies.protoBufJavaLite)
     implementation(Dependencies.protoBufKotlinLite)
+}
+
+fun DependencyHandler.navigatorModule() {
+    moduleImplementation(project(":core:navigator"))
 }

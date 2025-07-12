@@ -24,6 +24,12 @@ object Dependencies {
     const val COMPOSE_MATERIAL =
         "androidx.compose.material:material:${DependenciesVersions.COMPOSE_MATERIAL}"
     const val COMPOSE_RUNTIME = "androidx.lifecycle:lifecycle-runtime-compose:${DependenciesVersions.COMPOSE_RUNTIME}"
+    const val navigationFragmentKtx =
+        "androidx.navigation:navigation-fragment-ktx:${DependenciesVersions.NAVIGATION}"
+    const val navigation =
+        "androidx.navigation:navigation-ui-ktx:${DependenciesVersions.NAVIGATION}"
+    const val navigation2 = "androidx.navigation:navigation-compose:${DependenciesVersions.NAVIGATION}"
+    const val googleJson = "com.google.code.gson:gson:${DependenciesVersions.GOOGLE_GSON}"
 
     // Dependency Injection (Hilt)
     const val HILT_ANDROID = "com.google.dagger:hilt-android:${DependenciesVersions.HILT}"
