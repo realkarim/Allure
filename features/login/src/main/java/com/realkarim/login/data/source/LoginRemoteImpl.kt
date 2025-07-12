@@ -2,11 +2,11 @@ package com.realkarim.login.data.source
 
 import com.realkarim.data.mapper.toDomain
 import com.realkarim.data.source.NetworkDataSource
+import com.realkarim.domain.model.User
 import com.realkarim.domain.result.OutCome
 import com.realkarim.login.data.mapper.LoginMapper
 import com.realkarim.login.data.request.LoginRequestBody
 import com.realkarim.login.data.service.LoginService
-import com.realkarim.login.domain.model.User
 import com.realkarim.login.domain.source.LoginRemote
 
 class LoginRemoteImpl(

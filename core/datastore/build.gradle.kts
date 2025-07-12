@@ -1,4 +1,5 @@
 import dependency.dataStore
+import dependency.kotlinx
 import dependency.testDebugDeps
 import dependency.testDeps
 import dependency.testImplDeps
@@ -15,6 +16,7 @@ android {
 
 dependencies {
   dataStore()
+  kotlinx()
   testDeps()
   testImplDeps()
   testDebugDeps()

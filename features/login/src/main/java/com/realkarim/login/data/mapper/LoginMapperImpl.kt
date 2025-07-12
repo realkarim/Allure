@@ -1,7 +1,7 @@
 package com.realkarim.login.data.mapper
 
+import com.realkarim.domain.model.User
 import com.realkarim.login.data.response.LoginResponse
-import com.realkarim.login.domain.model.User
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 

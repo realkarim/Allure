@@ -1,5 +1,6 @@
 package com.realkarim.home
 
+import junit.framework.TestCase.assertEquals
 import org.junit.Test
 
 /**

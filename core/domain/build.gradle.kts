@@ -1,3 +1,4 @@
+import dependency.kotlinx
 import dependency.testDebugDeps
 import dependency.testDeps
 import dependency.testImplDeps
@@ -14,6 +15,7 @@ android {
 apply<SharedLibraryGradlePlugin>()
 
 dependencies {
+  kotlinx()
   testDeps()
   testImplDeps()
   testDebugDeps()

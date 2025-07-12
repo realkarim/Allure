@@ -1,8 +1,8 @@
 package com.realkarim.login.domain.usecase
 
+import com.realkarim.domain.model.User
 import com.realkarim.domain.result.OutCome
 import com.realkarim.domain.usecase.AsyncUseCase
-import com.realkarim.login.domain.model.User
 import com.realkarim.login.domain.source.LoginRemote
 import javax.inject.Inject
 

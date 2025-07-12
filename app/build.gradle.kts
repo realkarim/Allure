@@ -8,6 +8,7 @@ import dependency.dataStore
 import dependency.dataStoreModule
 import dependency.domainModule
 import dependency.hilt
+import dependency.kotlinx
 import dependency.loginModule
 import dependency.okHttp
 import dependency.presentationModule
@@ -115,6 +116,7 @@ dependencies {
   protoDataStoreModule()
   presentationModule()
   dataStore() // Find a way to remove this dependency, maybe wrap it in a dataStoreModule
+  kotlinx()
   protoDataStore()
   androidx()
   hilt()

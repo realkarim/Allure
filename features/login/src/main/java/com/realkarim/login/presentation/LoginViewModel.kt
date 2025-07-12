@@ -2,7 +2,7 @@ package com.realkarim.login.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.realkarim.login.domain.model.User
+import com.realkarim.domain.model.User
 import com.realkarim.login.domain.usecase.LoginUseCase
 import com.realkarim.login.presentation.action.LoginInput
 import com.realkarim.login.presentation.action.LoginOutput
