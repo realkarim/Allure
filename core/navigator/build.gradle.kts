@@ -6,18 +6,18 @@ import dependency.testImplDeps
 import plugin.SharedLibraryGradlePlugin
 
 plugins {
-    id(plugin.BuildPlugins.ANDROID_LIBRARY)
+  id(plugin.BuildPlugins.ANDROID_LIBRARY)
 }
 apply<SharedLibraryGradlePlugin>()
 
 android {
-    namespace = "com.realkarim.navigator"
+  namespace = "com.realkarim.navigator"
 }
 
 dependencies {
-    androidx()
-    hilt()
-    testDeps()
-    testImplDeps()
-    testDebugDeps()
+  androidx()
+  hilt()
+  testDeps()
+  testImplDeps()
+  testDebugDeps()
 }

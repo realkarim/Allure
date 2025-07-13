@@ -118,3 +118,7 @@ fun DependencyHandler.protoDataStore() {
 fun DependencyHandler.navigatorModule() {
     moduleImplementation(project(":core:navigator"))
 }
+
+fun DependencyHandler.signupModule() {
+    moduleImplementation(project(":features:signup"))
+}

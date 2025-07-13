@@ -36,7 +36,11 @@ class LoginViewModel @Inject constructor(
 
   fun setInput(input: LoginInput) {
     when (input) {
-      is LoginInput.LoginButtonClicked -> login()
+//      is LoginInput.LoginButtonClicked -> login()
+      is LoginInput.LoginButtonClicked -> sendOutput {
+        LoginOutput.NavigateToMain(User("123", "Karim", "123@4.com", "photo"))
+      }
+
       is LoginInput.PasswordUpdated -> updateState { copy(password = input.password) }
       is LoginInput.RegisterButtonClicked -> sendOutput { LoginOutput.NavigateToRegister }
       is LoginInput.UserNameUpdated -> updateState { copy(userName = input.username) }
@@ -69,7 +73,7 @@ class LoginViewModel @Inject constructor(
     }
   }
 
-  fun login() {
+  private fun login() {
     viewModelScope.launch {
       // loading popup state
       val newStateRenderer = StateRenderer.LoadingPopup<LoginUiState, User>(loginUiState)

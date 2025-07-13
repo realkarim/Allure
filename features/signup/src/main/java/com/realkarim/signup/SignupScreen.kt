@@ -20,58 +20,70 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.realkarim.navigator.viewmodel.AppNavigatorViewModel
 
 @Composable
 fun SignupScreen() {
-    var userName by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var confirmPassword by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
+  var userName by remember { mutableStateOf("") }
+  var password by remember { mutableStateOf("") }
+  var confirmPassword by remember { mutableStateOf("") }
+  var email by remember { mutableStateOf("") }
+  val appNavigatorViewModel: AppNavigatorViewModel = hiltViewModel()
 
-    Surface(modifier = Modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier.padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-        ) {
-            OutlinedTextField(
-                modifier = Modifier.fillMaxWidth(),
-                label = { Text(text = "Username") },
-                value = userName,
-                onValueChange = { userName = it },
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            OutlinedTextField(
-                modifier = Modifier.fillMaxWidth(),
-                label = { Text(text = "Password") },
-                value = password,
-                onValueChange = { password = it },
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            OutlinedTextField(
-                modifier = Modifier.fillMaxWidth(),
-                label = { Text(text = "Confirm Password") },
-                value = confirmPassword,
-                onValueChange = { confirmPassword = it },
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            OutlinedTextField(
-                modifier = Modifier.fillMaxWidth(),
-                label = { Text(text = "Email") },
-                value = email,
-                onValueChange = { email = it },
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            Button(
-                modifier = Modifier.fillMaxWidth(),
-                onClick = { },
-            ) {
-                Text(text = "Sign Up")
-            }
-            Spacer(modifier = Modifier.height(16.dp))
-            TextButton(onClick = { }) {
-                Text(text = "If you have an account, Sign In Now!")
-            }
-        }
+  Surface(modifier = Modifier.fillMaxSize()) {
+    Column(
+      modifier = Modifier.padding(16.dp),
+      horizontalAlignment = Alignment.CenterHorizontally,
+      verticalArrangement = Arrangement.Center,
+    ) {
+      OutlinedTextField(
+        label = { Text(text = "UserName") },
+        value = userName,
+        onValueChange = { userName = it },
+        modifier = Modifier
+          .fillMaxWidth()
+          .padding(16.dp),
+      )
+      Spacer(modifier = Modifier.height(16.dp))
+      OutlinedTextField(
+        label = { Text(text = "Email") },
+        value = email,
+        onValueChange = { email = it },
+        modifier = Modifier
+          .fillMaxWidth()
+          .padding(16.dp),
+      )
+      Spacer(modifier = Modifier.height(16.dp))
+      OutlinedTextField(
+        label = { Text(text = "Password") },
+        value = password,
+        onValueChange = { password = it },
+        modifier = Modifier
+          .fillMaxWidth()
+          .padding(16.dp),
+      )
+      Spacer(modifier = Modifier.height(16.dp))
+      OutlinedTextField(
+        label = { Text(text = "Confirm Password") },
+        value = confirmPassword,
+        onValueChange = { confirmPassword = it },
+        modifier = Modifier
+          .fillMaxWidth()
+          .padding(16.dp),
+      )
+      Spacer(modifier = Modifier.height(16.dp))
+
+      Button(
+        modifier = Modifier.fillMaxWidth(),
+        onClick = { },
+      ) {
+        Text(text = "Sign Up")
+      }
+      Spacer(modifier = Modifier.height(16.dp))
+      TextButton(onClick = { appNavigatorViewModel.popBackStack() }) {
+        Text(text = "If you have an account, Sign In Now!")
+      }
     }
+  }
 }

@@ -2,6 +2,7 @@ import dependency.androidx
 import dependency.dataModule
 import dependency.domainModule
 import dependency.hilt
+import dependency.navigatorModule
 import dependency.presentationModule
 import dependency.retrofit
 import dependency.room
@@ -35,6 +36,7 @@ android {
 apply<SharedLibraryGradlePlugin>()
 
 dependencies {
+  navigatorModule()
   domainModule()
   dataModule()
   presentationModule()

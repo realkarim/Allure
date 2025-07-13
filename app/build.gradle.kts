@@ -8,14 +8,17 @@ import dependency.dataStore
 import dependency.dataStoreModule
 import dependency.domainModule
 import dependency.hilt
+import dependency.homeModule
 import dependency.kotlinx
 import dependency.loginModule
+import dependency.navigatorModule
 import dependency.okHttp
 import dependency.presentationModule
 import dependency.protoDataStore
 import dependency.protoDataStoreModule
 import dependency.retrofit
 import dependency.room
+import dependency.signupModule
 import dependency.testDebugDeps
 import dependency.testDeps
 import dependency.testImplDeps
@@ -109,6 +112,9 @@ android {
 }
 
 dependencies {
+  homeModule()
+  signupModule()
+  navigatorModule()
   loginModule()
   dataModule()
   domainModule()
