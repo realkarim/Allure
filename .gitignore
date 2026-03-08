@@ -56,4 +56,5 @@ compose_cache/
 *.class
 
 /detekt
-/docs
+/docs/app
+/docs/login
